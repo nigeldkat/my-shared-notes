@@ -1,0 +1,20 @@
+<mat-nav-list>
+  <a *ngIf='!isAuth' mat-list-item routerLink="/signup" (click)="onClose()">
+    <mat-icon>face</mat-icon>
+    <span class="nav-caption">Signup</span>
+  </a>
+  <a *ngIf='!isAuth' mat-list-item routerLink="/login" (click)="onClose()">
+    <mat-icon>touch_app</mat-icon>
+    <span class="nav-caption">Login</span>
+  </a>
+  <a *ngIf='isAuth' mat-list-item routerLink="/note" (click)="onClose()">
+    <mat-icon>timeline</mat-icon>
+    <span class="nav-caption">Notes</span>
+  </a>
+  <mat-list-item >
+    <button *ngIf='isAuth'  mat-icon-button  (click)="onLogout()">
+      <mat-icon>eject</mat-icon>
+      <span class="nav-caption">Logout</span>
+    </button>
+  </mat-list-item>
+</mat-nav-list>
