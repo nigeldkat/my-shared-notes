@@ -10,6 +10,7 @@ import {
 
 import { UIService } from '../shared/ui.service';
 import { User } from '../auth/user.model';
+import { NoteService } from '../note/note.service';
 
 @Injectable()
 export class AuthService {
@@ -19,7 +20,7 @@ export class AuthService {
     constructor(private router: Router,
         private afAuth: AngularFireAuth, 
         private afs: AngularFirestore,
-        //private trainingService: TrainingService,
+        private noteService: NoteService,
         private uiService: UIService
     ) { }
 
@@ -35,7 +36,7 @@ export class AuthService {
             } else {
                 //console.log('in auth callback false');
                 this.isAuthenticated = false;
-                //this.trainingService.cancelSubscriptions();
+                this.noteService.cancelSubscriptions();
                 this.authChange.next(false);
                 this.router.navigate(['/login']);
             }

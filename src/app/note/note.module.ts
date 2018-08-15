@@ -13,7 +13,7 @@ import {NoteService} from './note.service';
         SharedModule,
         NoteRoutingModule
     ],
-    providers:[NoteService],
+    providers:[],
     exports: [],
     entryComponents: []
 })
