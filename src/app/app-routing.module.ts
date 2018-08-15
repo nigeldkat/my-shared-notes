@@ -9,8 +9,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 const routes: Routes = [
     { path: '', component: WelcomeComponent},
     { path: 'note', loadChildren: './note/note.module#NoteModule', canLoad:[AuthGuard]},
-    { path: 'training', loadChildren: './training/training.module#TrainingModule', canLoad:[AuthGuard]}//,
-    //{ path: '**', component: PageNotFoundComponent}  
+     //{ path: '**', component: PageNotFoundComponent}  
     //page not found overrode by code in auth service isauth listner
     //or just not working in this config
 ];
