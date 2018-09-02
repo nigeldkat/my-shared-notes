@@ -13,7 +13,7 @@ import { NgForm} from '@angular/forms';
 })
 export class NoteComponent implements OnInit, OnDestroy {
   private noteSubscription: Subscription;
-  private noteList: Note[] = [];
+  public noteList: Note[] = [];
   @ViewChild('f') templateForm : NgForm;
 
   constructor(private nService: NoteService) { }

@@ -3,7 +3,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { MaterialModule } from '../material.module';
 import { FlexLayoutModule} from '@angular/flex-layout';
-import { CommonModule } from '../../../node_modules/@angular/common';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
     imports:[

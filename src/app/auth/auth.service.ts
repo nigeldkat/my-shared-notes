@@ -9,7 +9,7 @@ import {
   } from "angularfire2/firestore";
 
 import { UIService } from '../shared/ui.service';
-import { User } from '../auth/user.model';
+import { User } from './user.model';
 import { NoteService } from '../note/note.service';
 
 @Injectable()
@@ -32,7 +32,7 @@ export class AuthService {
                 this.isAuthenticated = true;
                 this.authChange.next(true);
                 //this overrides any page not found errors
-                this.router.navigate(['/note']);
+                //this.router.navigate(['/note']);
             } else {
                 //console.log('in auth callback false');
                 this.isAuthenticated = false;
@@ -51,6 +51,7 @@ export class AuthService {
             .then(result => {
                 //console.log('successful login')
                 this.uiService.loadingStateChanged.next(false);
+                this.router.navigate(['/note']);
             })
             .catch(error => {
                 //console.log('failed login')
