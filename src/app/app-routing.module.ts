@@ -8,7 +8,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 const routes: Routes = [
     { path: '', component: WelcomeComponent},
-    { path: 'note', loadChildren: './note/note.module#NoteModule', canLoad:[AuthGuard]},
+    { path: 'note/:id', loadChildren: './note/note.module#NoteModule', canLoad:[AuthGuard]},
     { path: 'notelist', loadChildren: './notelist/notelist.module#NoteListModule', canLoad:[AuthGuard]},    
     //{ path: 'note', loadChildren: './note/note.module#NoteModule'},
     //{ path: 'notelist', loadChildren: './notelist/notelist.module#NoteListModule'},

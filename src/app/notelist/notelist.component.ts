@@ -22,7 +22,6 @@ export class NoteListComponent implements OnInit, OnDestroy {
     this.noteSubscription = this.nService.notesChanged.subscribe(
       (notes: NoteList[]) => {
         this.noteList = notes;
-        console.log('notelist collection: ', this.noteList);
       }
     );
     this.nService.fetchNotes();

@@ -17,7 +17,6 @@ export class NoteListService {
 
     fetchNotes() {
         const uid :string = this.authService.currentUserId;
-        console.log('uid ', uid);
         //8OBRDpgo38aWAIIsHktriVTE4Bp1
         this.fbSubs.push(
             

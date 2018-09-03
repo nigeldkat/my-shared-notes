@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import { ActivatedRoute} from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { NoteService } from './note.service';
@@ -16,15 +17,18 @@ export class NoteComponent implements OnInit, OnDestroy {
   public noteList: Note[] = [];
   @ViewChild('f') templateForm : NgForm;
 
-  constructor(private nService: NoteService) { }
+  constructor(private nService: NoteService, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    const id: string = this.route.snapshot.paramMap.get('id');
+
     this.noteSubscription = this.nService.notesChanged.subscribe(
       (notes: Note[]) => {
         this.noteList = notes;
       }
     );
-    this.nService.fetchNotes();
+    this.nService.fetchNotes(id);
+
   }
   ngOnDestroy(){
     if(this.noteSubscription){
@@ -33,9 +37,16 @@ export class NoteComponent implements OnInit, OnDestroy {
   }
 
   addNewNote(form: NgForm){
-    this.nService.addDataToDatabase({text: form.value.listItem});
+    this.nService.addNoteToList({Desc: form.value.listItem, ID: 'tempID'});
     this.templateForm.resetForm();
+  }
 
+  editNote(id: string){
+
+  }
+
+  deleteNote(id: string){
+    this.nService.deleteNoteItem(id);
   }
 
 

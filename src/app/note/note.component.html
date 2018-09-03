@@ -1,11 +1,10 @@
 <section class="new-training" fxLayout="column" fxLayoutAlign="center center ">
-        <a routerLink="/notelist">Note List</a>
     <mat-card fxFlex.xs="100%" fxFlex="400px">
         <mat-card-title fxLayoutAlign="center ">List Items</mat-card-title>
         <mat-card-content fxLayoutAlign="center ">
             <ul>
                 <li *ngFor="let note of noteList">
-                    {{note.text}}
+                    {{note.Desc}}&nbsp;&nbsp;<button (click)="deleteNote(note.ID)">Delete</button>
                 </li>
             </ul>
         </mat-card-content>
@@ -16,11 +15,11 @@
             <mat-card-title fxLayoutAlign="center ">Add Items</mat-card-title>
             <mat-card-content fxLayoutAlign="center ">
                 <mat-form-field>
-                    <input type="text" matInput placeholder="List Item" ngModel name="listItem" required>
+                    <input type="text" matInput placeholder="Item" ngModel name="listItem" required>
                 </mat-form-field>
             </mat-card-content>
             <mat-card-actions fxLayoutAlign="center ">
-                <button type="submit" mat-button [disabled]="f.invalid">Start</button>
+                <button type="submit" mat-button [disabled]="f.invalid">Add Item</button>
             </mat-card-actions>
         </mat-card>
     </form>

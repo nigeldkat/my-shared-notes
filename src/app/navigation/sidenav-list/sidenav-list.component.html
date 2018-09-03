@@ -7,9 +7,9 @@
     <mat-icon>touch_app</mat-icon>
     <span class="nav-caption">Login</span>
   </a>
-  <a *ngIf='isAuth' mat-list-item routerLink="/note" (click)="onClose()">
+  <a *ngIf='isAuth' mat-list-item routerLink="/notelist" (click)="onClose()">
     <mat-icon>timeline</mat-icon>
-    <span class="nav-caption">Notes</span>
+    <span class="nav-caption">Note List</span>
   </a>
   <mat-list-item >
     <button *ngIf='isAuth'  mat-icon-button  (click)="onLogout()">
