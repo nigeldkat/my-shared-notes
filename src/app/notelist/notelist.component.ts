@@ -14,7 +14,7 @@ import { NgForm} from '@angular/forms';
 export class NoteListComponent implements OnInit, OnDestroy {
   private noteSubscription: Subscription;
   public noteList: NoteList[] = [];
-  //@ViewChild('f') templateForm : NgForm;
+  @ViewChild('f') templateForm : NgForm;
 
   constructor(private nService: NoteListService) { }
 
@@ -33,7 +33,9 @@ export class NoteListComponent implements OnInit, OnDestroy {
     }
   }
 
+  //  //noteDesc
   addNewNote(form: NgForm){
+    this.nService.addNoteToNoteList(form.value.noteDesc);
     //this.nService.addDataToDatabase({text: form.value.listItem});
     //this.templateForm.resetForm();
 

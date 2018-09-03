@@ -6,7 +6,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import {
     AngularFirestore,
     AngularFirestoreDocument
-  } from "angularfire2/firestore";
+} from "angularfire2/firestore";
 
 import { UIService } from '../shared/ui.service';
 import { User } from './user.model';
@@ -15,22 +15,25 @@ import { NoteService } from '../note/note.service';
 @Injectable()
 export class AuthService {
     authChange = new Subject<boolean>();
+    user: any = null;
     private isAuthenticated = false;
 
     constructor(private router: Router,
-        private afAuth: AngularFireAuth, 
+        private afAuth: AngularFireAuth,
         private afs: AngularFirestore,
         private noteService: NoteService,
         private uiService: UIService
     ) { }
 
-    
+
     initAuthListener() {
         this.afAuth.authState.subscribe(user => {
             if (user) {
                 //console.log('in auth callback true');
                 this.isAuthenticated = true;
                 this.authChange.next(true);
+                this.user = user;
+                //console.log('user - ', user);
                 //this overrides any page not found errors
                 //this.router.navigate(['/note']);
             } else {
@@ -38,12 +41,13 @@ export class AuthService {
                 this.isAuthenticated = false;
                 this.noteService.cancelSubscriptions();
                 this.authChange.next(false);
+                this.user = null;
                 this.router.navigate(['/login']);
             }
         });//
     }
 
-    login(email: string, password: string){
+    login(email: string, password: string) {
         //console.log('in login')
         this.uiService.loadingStateChanged.next(true);
         this.afAuth.auth
@@ -55,13 +59,13 @@ export class AuthService {
             })
             .catch(error => {
                 //console.log('failed login')
-                this.uiService.loadingStateChanged.next(false);                
+                this.uiService.loadingStateChanged.next(false);
                 this.uiService.showSnackbar(error.message, null, 3000);
             })
 
     }
 
-    
+
     regusterUser(email: string, password: string, displayName: string) {
         this.uiService.loadingStateChanged.next(true);
         this.afAuth.auth
@@ -76,25 +80,30 @@ export class AuthService {
             });
     }
 
-    logout(){
+    logout() {
         this.afAuth.auth.signOut();
     }
-    
+
     isAuth() {
         return this.isAuthenticated;
     }
 
+
+    get currentUserId(): string {
+        return this.isAuthenticated ? this.user.uid : null
+    }
+
     private updateUserData(user, displayName) {
         const userRef: AngularFirestoreDocument<User> = this.afs.doc(
-          `users/${user.uid}`
+            `users/${user.uid}`
         );
-        
+
         const data: User = {
-          uid: user.uid,
-          email: user.email || null,
-          displayName: displayName
+            uid: user.uid,
+            email: user.email || null,
+            displayName: displayName
         };
         return userRef.set(data, { merge: true });
-      }
+    }
 
 }
