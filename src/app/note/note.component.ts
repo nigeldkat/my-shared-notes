@@ -14,14 +14,16 @@ import { NgForm} from '@angular/forms';
 })
 export class NoteComponent implements OnInit, OnDestroy {
   private noteSubscription: Subscription;
+  private oldNoteSubscription: Subscription;
   public noteList: Note[] = [];
+  public oldNoteList: Note[]=[];
   @ViewChild('f') templateForm : NgForm;
 
   constructor(private nService: NoteService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     const id: string = this.route.snapshot.paramMap.get('id');
-
+//fetchOldNotes
     this.noteSubscription = this.nService.notesChanged.subscribe(
       (notes: Note[]) => {
         this.noteList = notes;
@@ -29,15 +31,26 @@ export class NoteComponent implements OnInit, OnDestroy {
     );
     this.nService.fetchNotes(id);
 
+    this.oldNoteSubscription = this.nService.oldNotesChanged.subscribe(
+      (notes: Note[]) => {
+        this.oldNoteList = notes;
+      }
+    );
+    this.nService.fetchOldNotes(id);
+
   }
   ngOnDestroy(){
     if(this.noteSubscription){
       this.noteSubscription.unsubscribe();
     }
+    if(this.oldNoteSubscription){
+      this.oldNoteSubscription.unsubscribe();
+    }
   }
 
   addNewNote(form: NgForm){
-    this.nService.addNoteToList({Desc: form.value.listItem, ID: 'tempID'});
+    const dateTime: Date = new Date();
+    this.nService.addNoteToList({Desc: form.value.listItem, ID: 'tempID', Selected: false, Time: dateTime });
     this.templateForm.resetForm();
   }
 
@@ -47,6 +60,10 @@ export class NoteComponent implements OnInit, OnDestroy {
 
   deleteNote(id: string){
     this.nService.deleteNoteItem(id);
+  }
+
+  selectedItem(id: string, selected: boolean){
+    this.nService.changeSelected(id,selected);
   }
 
 
