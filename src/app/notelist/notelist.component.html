@@ -6,13 +6,15 @@
                 <li *ngFor="let n of noteList">
                     {{n.Desc}} --
                     <a routerLink="/note/{{n.ID}}">View Notes</a>
+                    <a routerLink="/notemembers/{{n.ID}}">Share List</a>
+                    <button (click)="deleteNoteList(n.ID)">Delete List</button>
                     <!-- {{n.Creator}} -->
                 </li>
             </ul>
         </mat-card-content>
 
     </mat-card>
-    <form (ngSubmit)="addNewNote(f)" #f="ngForm">
+    <form (ngSubmit)="addNewList(f)" #f="ngForm">
         <mat-card fxFlex.xs="100%" fxFlex="400px">
             <mat-card-title fxLayoutAlign="center ">New List</mat-card-title>
             <mat-card-content fxLayoutAlign="center ">

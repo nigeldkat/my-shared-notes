@@ -31,15 +31,18 @@ export class NoteListComponent implements OnInit, OnDestroy {
       this.noteSubscription.unsubscribe();
     }
   }
-
-  //  //noteDesc
-  addNewNote(form: NgForm){
+ 
+  addNewList(form: NgForm){
     this.nService.addNoteToNoteList(form.value.noteDesc);
     //this.nService.addDataToDatabase({text: form.value.listItem});
-    //this.templateForm.resetForm();
-
+    this.templateForm.resetForm();
   }
 
+  deleteNoteList(ID: string){
+    //add are you sure maybe?
+    //alert('in delete - ' + ID);
+    this.nService.deleteNoteList(ID);
+  }
 
 
 }

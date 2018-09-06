@@ -52,8 +52,9 @@ export class NoteListService {
             const list : AngularFirestoreDocument<NoteList> = this.db.doc(`Lists/${data.id}`)
             item.ID = data.id;
             
-            //const newUID: string = 'newmemberadded';
-            //item.Members[newUID] = true;
+            //for now hard code Kathy
+            const newUID: string = 'zGrpwEsF0xc25bR6O6KuTHFkZxM2';
+            item.Members[newUID] = true;
             // let result = '';
             // for (let i in item.Members){
             //     console.log('in for');
@@ -67,6 +68,11 @@ export class NoteListService {
 
 
         });
+    }
+
+    deleteNoteList(ID: string){
+        const list : AngularFirestoreDocument<NoteList> = this.db.doc(`Lists/${ID}`);
+        list.delete();
     }
 
     cancelSubscriptions() {

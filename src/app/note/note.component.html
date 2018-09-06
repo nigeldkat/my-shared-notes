@@ -1,16 +1,33 @@
+
+
 <section class="new-training" fxLayout="column" fxLayoutAlign="center center ">
     <mat-card fxFlex.xs="100%" fxFlex="400px">
         <mat-card-title fxLayoutAlign="center ">List Items</mat-card-title>
         <mat-card-content fxLayoutAlign="center ">
-            <ul>
+            <!-- <mat-selection-list>
+                <mat-list-option *ngFor="let note of noteList">
+                    {{note.Desc}}
+                </mat-list-option>
+            </mat-selection-list> -->
+            <mat-list dense>
+                <mat-list-item *ngFor="let note of noteList">
+                    {{note.Desc}}
+            <mat-divider ></mat-divider> 
+                </mat-list-item>
+            </mat-list>
+            <!-- <ul>
                 <li *ngFor="let note of noteList">
                     {{note.Desc}}&nbsp;&nbsp;<button (click)="deleteNote(note.ID)">Delete</button>
                 </li>
-            </ul>
+            </ul> -->
         </mat-card-content>
 
     </mat-card>
-    <form (ngSubmit)="addNewNote(f)" #f="ngForm" >
+
+
+
+
+    <form (ngSubmit)="addNewNote(f)" #f="ngForm">
         <mat-card fxFlex.xs="100%" fxFlex="400px">
             <mat-card-title fxLayoutAlign="center ">Add Items</mat-card-title>
             <mat-card-content fxLayoutAlign="center ">
