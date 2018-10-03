@@ -1,11 +1,13 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { ActivatedRoute} from '@angular/router';
+import { NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 import { NoteMembersService } from './note-members.service';
-// import { Note } from './note.model';
+import { NoteList } from '../notelist/notelist.model';
+import { ListWithMembers } from './list-with-members.model';
 
-import { NgForm} from '@angular/forms';
+
 
 @Component({
   selector: 'app-note',
@@ -14,40 +16,65 @@ import { NgForm} from '@angular/forms';
 })
 export class NoteMembersComponent implements OnInit, OnDestroy {
   private noteSubscription: Subscription;
-  //public noteList: Note[] = [];
-  @ViewChild('f') templateForm : NgForm;
+  private listSubscription: Subscription;
+  private addMemberStatusSubscription: Subscription;
+
+  listData: NoteList;
+  listWithMembers: ListWithMembers;
+
+  addMemberStatus: string;
+
+  @ViewChild('f') templateForm: NgForm;
 
   constructor(private nService: NoteMembersService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     const id: string = this.route.snapshot.paramMap.get('id');
 
-    // this.noteSubscription = this.nService.notesChanged.subscribe(
-    //   (notes: Note[]) => {
-    //     this.noteList = notes;
-    //   }
-    // );
-    // this.nService.fetchNotes(id);
+    this.listSubscription = this.nService.ListWithMembersChanged.subscribe(
+      (list: ListWithMembers) => {
+        this.listWithMembers = list;
+        console.log('from component list with members - ', this.listWithMembers)
+      }
+    )
+    this.nService.getListData(id);
+
+    this.addMemberStatusSubscription = this.nService.AddMemberStatusChanged.subscribe(
+      (status: string) => {
+        this.addMemberStatus = status;
+      }
+    )
+
+    this.nService.getAddMemberStatus();
 
   }
-  ngOnDestroy(){
-    if(this.noteSubscription){
-      this.noteSubscription.unsubscribe();
+  ngOnDestroy() {
+    if (this.listSubscription) {
+      this.listSubscription.unsubscribe();
     }
   }
 
-  addNewNote(form: NgForm){
-    //this.nService.addNoteToList({Desc: form.value.listItem, ID: 'tempID'});
-    this.templateForm.resetForm();
+  addMemberToNote(form: NgForm) {
+
+    this.nService.addMember(form.value.email);
   }
 
-  editNote(id: string){
 
-  }
 
-  deleteNote(id: string){
-    //this.nService.deleteNoteItem(id);
-  }
+
+
+  // addNewNote(form: NgForm) {
+  //   //this.nService.addNoteToList({Desc: form.value.listItem, ID: 'tempID'});
+  //   this.templateForm.resetForm();
+  // }
+
+  // editNote(id: string) {
+
+  // }
+
+  // deleteNote(id: string) {
+  //   //this.nService.deleteNoteItem(id);
+  // }
 
 
 

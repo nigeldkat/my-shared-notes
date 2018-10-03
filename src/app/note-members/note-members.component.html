@@ -1,1 +1,16 @@
-<h2>Note Member Page</h2>
+<section class="signup-form">
+    <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="addMemberToNote(f)">
+        <h2>Add member to list.</h2>
+        <p>{{addMemberStatus}}</p>
+        <mat-form-field>
+            <input type="email" matInput placeholder="Search for email" 
+            ngModel name="email" email required #emailInput="ngModel">
+            <mat-error *ngIf="emailInput.hasError('required')">Email is required.</mat-error>
+            <mat-error *ngIf="!emailInput.hasError('required')">E-Mail is invalid.</mat-error>
+        </mat-form-field>
+        <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Add Member to List</button>
+    </form>
+
+</section>
+
+
