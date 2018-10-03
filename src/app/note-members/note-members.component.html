@@ -1,16 +1,29 @@
-<section class="signup-form">
-    <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="addMemberToNote(f)">
-        <h2>Add member to list.</h2>
-        <p>{{addMemberStatus}}</p>
-        <mat-form-field>
-            <input type="email" matInput placeholder="Search for email" 
-            ngModel name="email" email required #emailInput="ngModel">
-            <mat-error *ngIf="emailInput.hasError('required')">Email is required.</mat-error>
-            <mat-error *ngIf="!emailInput.hasError('required')">E-Mail is invalid.</mat-error>
-        </mat-form-field>
-        <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Add Member to List</button>
-    </form>
-
+<section fxLayout="column" fxLayoutAlign="center center ">
+    <mat-card class="list-card">
+        <mat-card-title>Members in {{listWithMembers?.Desc}} List</mat-card-title>
+        <mat-card-content>
+            <ul>
+                <li *ngFor="let m of listWithMembers?.Members">
+                    <div>{{m?.displayName}}</div>
+                    
+                </li>
+            </ul>
+        </mat-card-content>
+    </mat-card>
+    <mat-card class="list-card-single">
+        <mat-card-title>Add Member To List</mat-card-title>
+        <form fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" #f="ngForm" (ngSubmit)="addMemberToNote(f)">
+            <mat-card-content>
+                <p>{{addMemberStatus}}</p>
+                <mat-form-field>
+                    <input type="email" matInput placeholder="Search for email" ngModel name="email" email required #emailInput="ngModel">
+                    <mat-error *ngIf="emailInput.hasError('required')">Email is required.</mat-error>
+                    <mat-error *ngIf="!emailInput.hasError('required')">E-Mail is invalid.</mat-error>
+                </mat-form-field>
+            </mat-card-content>
+            <mat-card-actions>
+                <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Add Member to List</button>
+            </mat-card-actions>
+        </form>
+    </mat-card>
 </section>
-
-

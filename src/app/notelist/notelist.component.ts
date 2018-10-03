@@ -9,7 +9,7 @@ import { NgForm} from '@angular/forms';
 @Component({
   selector: 'app-notelist',
   templateUrl: './notelist.component.html',
-  styleUrls: ['./notelist.component.css']
+  styleUrls: ['./notelist.component.css', '../app.component.css']
 })
 export class NoteListComponent implements OnInit, OnDestroy {
   private noteSubscription: Subscription;

@@ -5,3 +5,14 @@ mat-sidenav-container, mat-sidenav-content, mat-sidenav{
 mat-sidenav{
     width: 250px;
 }
+
+.list-card {
+    margin: 1.5em 1.5em 0em 1.5em ;
+    max-width: 400px;
+    min-width: 300px;
+  }
+  .list-card-single {
+    margin: 1.5em 1.5em 1.5em 1.5em ;
+    max-width: 400px;
+    min-width: 300px;
+  }

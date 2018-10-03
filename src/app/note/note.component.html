@@ -1,61 +1,62 @@
-<section class="new-training" fxLayout="column" fxLayoutAlign="center center ">
-    <mat-card class="list-card" fxFlex.xs="100%" fxFlex="400px">
-        <mat-card-title fxLayoutAlign="center ">List Items</mat-card-title>
-        <mat-card-content fxLayoutAlign="center ">
-            <!-- <mat-selection-list>
-                <mat-list-option *ngFor="let note of noteList">
-                    {{note.Desc}}
-                </mat-list-option>
-            </mat-selection-list> -->
-            <mat-list dense>
-                <mat-list-item *ngFor="let note of noteList">
-                    <input type="checkbox" [ngModel]="note.Selected" (click)="selectedItem(note.ID, true)">{{note.Desc}}
-                    <button (click)="deleteNote(note.ID)">Delete</button>
-                    <mat-divider></mat-divider>
-                </mat-list-item>
-            </mat-list>
-            <!-- <ul>
-                <li *ngFor="let note of noteList">
-                    {{note.Desc}}&nbsp;&nbsp;<button (click)="deleteNote(note.ID)">Delete</button>
-                </li>
-            </ul> -->
-        </mat-card-content>
+<section fxLayout="column" fxLayoutAlign="center center ">
+    <!--fxLayoutAlign="center center "-->
 
-        <mat-card-title fxLayoutAlign="center ">In Basket</mat-card-title>
-        <mat-card-content fxLayoutAlign="center ">
-            <!-- <mat-selection-list>
-                <mat-list-option *ngFor="let note of noteList">
-                    {{note.Desc}}
-                </mat-list-option>
-            </mat-selection-list> -->
-            <mat-list dense>
-                <mat-list-item *ngFor="let note of oldNoteList">
-                    <input type="checkbox" [ngModel]="note.Selected" (click)="selectedItem(note.ID, false)">{{note.Desc}}
-                    <button (click)="deleteNote(note.ID)">Delete</button>
-                    <mat-divider></mat-divider>
-                </mat-list-item>
-            </mat-list>
-            <!-- <ul>
-                <li *ngFor="let note of noteList">
-                    {{note.Desc}}&nbsp;&nbsp;<button (click)="deleteNote(note.ID)">Delete</button>
-                </li>
-            </ul> -->
-        </mat-card-content>
+    <mat-tab-group >
+        <mat-tab label='List Items'>
+            <mat-card class="list-card" > <!--fxFlex.xs="100%" fxFlex="400px"-->
+                <mat-card-title fxLayoutAlign="center ">{{desc}} List</mat-card-title>
+                <mat-card-content fxLayoutAlign="center ">
 
-    </mat-card>
+                    <mat-list dense>
+                        <mat-list-item *ngFor="let note of noteList">
+                            <input type="checkbox" [ngModel]="note.Selected" (click)="selectedItem(note.ID, true)">{{note.Desc}}
+                            <button (click)="deleteNote(note.ID)">Delete</button>
+                            <mat-divider></mat-divider>
+                        </mat-list-item>
+                    </mat-list>
 
-    <form (ngSubmit)="addNewNote(f)" #f="ngForm">
-        <mat-card class="list-card" fxFlex.xs="100%" fxFlex="400px">
-            <mat-card-title fxLayoutAlign="center ">Add Items</mat-card-title>
-            <mat-card-content fxLayoutAlign="center ">
-                <mat-form-field>
-                    <input type="text" maxlength="25" matInput placeholder="Item" ngModel name="listItem" required >
-                </mat-form-field>
-            </mat-card-content>
-            <mat-card-actions fxLayoutAlign="center ">
-                <button type="submit" mat-button [disabled]="f.invalid">Add Item</button>
-            </mat-card-actions>
-        </mat-card>
-        
-    </form>
+                </mat-card-content>
+
+            </mat-card>
+
+            <form (ngSubmit)="addNewNote(f)" #f="ngForm">
+                <mat-card class="list-card-single" ><!--fxFlex.xs="100%" fxFlex="400px"-->
+                    <mat-card-title fxLayoutAlign="center ">Add Items</mat-card-title>
+                    <mat-card-content fxLayoutAlign="center ">
+                        <mat-form-field>
+                            <input type="text" maxlength="25" matInput placeholder="Item" ngModel name="listItem" required>
+                        </mat-form-field>
+                    </mat-card-content>
+                    <mat-card-actions fxLayoutAlign="center ">
+                        <button type="submit" mat-button [disabled]="f.invalid">Add Item</button>
+                    </mat-card-actions>
+                </mat-card>
+
+            </form>
+        </mat-tab>
+        <mat-tab label='Completed Items'>
+            <mat-card class="list-card-single" > <!--fxFlex.xs="100%" fxFlex="400px"-->
+                <!-- <mat-card-title fxLayoutAlign="center ">Saved Items</mat-card-title> -->
+                <mat-card-content>
+                    <!--fxLayoutAlign="center center"-->
+                    <div>
+                        <p>Items you'll add to the list again</p>
+                    </div>
+
+                    <mat-list dense>
+                        <mat-list-item *ngFor="let note of oldNoteList">
+                            <input type="checkbox" [ngModel]="note.Selected" (click)="selectedItem(note.ID, false)">{{note.Desc}}
+                            <button (click)="deleteNote(note.ID)">Delete</button>
+                            <mat-divider></mat-divider>
+                        </mat-list-item>
+                    </mat-list>
+
+                </mat-card-content>
+
+
+            </mat-card>
+        </mat-tab>
+    </mat-tab-group>
+
+
 </section>

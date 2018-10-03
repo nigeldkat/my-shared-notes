@@ -12,7 +12,7 @@ import { ListWithMembers } from './list-with-members.model';
 @Component({
   selector: 'app-note',
   templateUrl: './note-members.component.html',
-  styleUrls: ['./note-members.component.css']
+  styleUrls: ['./note-members.component.css', '../app.component.css']
 })
 export class NoteMembersComponent implements OnInit, OnDestroy {
   private noteSubscription: Subscription;

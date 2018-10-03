@@ -10,19 +10,22 @@ import { NgForm} from '@angular/forms';
 @Component({
   selector: 'app-note',
   templateUrl: './note.component.html',
-  styleUrls: ['./note.component.css']
+  styleUrls: ['./note.component.css']//, '../app.component.css'
 })
 export class NoteComponent implements OnInit, OnDestroy {
   private noteSubscription: Subscription;
   private oldNoteSubscription: Subscription;
   public noteList: Note[] = [];
   public oldNoteList: Note[]=[];
+  public desc: string;
   @ViewChild('f') templateForm : NgForm;
 
   constructor(private nService: NoteService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     const id: string = this.route.snapshot.paramMap.get('id');
+    this.desc = this.route.snapshot.paramMap.get('desc');
+    console.log('desc - ', this.desc)
 //fetchOldNotes
     this.noteSubscription = this.nService.notesChanged.subscribe(
       (notes: Note[]) => {
