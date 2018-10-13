@@ -15,6 +15,8 @@ export class NoteMembersService {
     ListWithMembersChanged = new Subject<ListWithMembers>();
     AddMemberStatusChanged = new Subject<string>();
 
+    noteListId: string;
+
     addMemberStatus: string;
 
     listData: NoteList;
@@ -27,10 +29,11 @@ export class NoteMembersService {
 
 
     getListData(id: string) {
-        const noteListId: string = '0QeHI30TMXqPANjOY6ZL';///Lists/0QeHI30TMXqPANjOY6ZL
+        this.noteListId = id;//: string = '0QeHI30TMXqPANjOY6ZL';///Lists/0QeHI30TMXqPANjOY6ZL
 
-        this.db.collection(`Lists`, ref => ref.where('ID', "==", noteListId)).valueChanges().subscribe(
+        this.db.collection(`Lists`, ref => ref.where('ID', "==", this.noteListId)).valueChanges().subscribe(            
             (notes: NoteList[]) => {
+                console.log('in subscribe ');
                 this.listData = notes[0];
                 this.listWithMembers = {
                     Creator: this.listData.Creator,
@@ -101,8 +104,8 @@ export class NoteMembersService {
                 if (userList.length == 1) {
                     const id: string = userList[0].uid;
                     // console.log('id - ', id);
-                    const noteListId: string = '0QeHI30TMXqPANjOY6ZL';
-                    const list: AngularFirestoreDocument<NoteList> = this.db.doc(`Lists/${noteListId}`);
+                    //const noteListId: string = '0QeHI30TMXqPANjOY6ZL';
+                    const list: AngularFirestoreDocument<NoteList> = this.db.doc(`Lists/${this.noteListId}`);
                     console.log('list - ', list);
                     this.listData.Members[id] = true;
                     // const newUID: string = 'zGrpwEsF0xc25bR6O6KuTHFkZxM3';

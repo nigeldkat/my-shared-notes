@@ -53,8 +53,8 @@ export class NoteListService {
             item.ID = data.id;
             
             //for now hard code Kathy
-            const newUID: string = 'zGrpwEsF0xc25bR6O6KuTHFkZxM2';
-            item.Members[newUID] = true;
+            //const newUID: string = 'zGrpwEsF0xc25bR6O6KuTHFkZxM2';
+            //item.Members[newUID] = true;
             // let result = '';
             // for (let i in item.Members){
             //     console.log('in for');

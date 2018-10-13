@@ -31,6 +31,7 @@ export class NoteMembersComponent implements OnInit, OnDestroy {
   ngOnInit() {
     const id: string = this.route.snapshot.paramMap.get('id');
 
+    console.log('id - ', id);
     this.listSubscription = this.nService.ListWithMembersChanged.subscribe(
       (list: ListWithMembers) => {
         this.listWithMembers = list;

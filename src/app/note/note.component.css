@@ -1,10 +1,16 @@
-.list-card {
+ .list-card {
     margin: 1.5em 1.5em 0em 1.5em ;
-    max-width: 300px;
-    min-width: 300px;
+    width: 350px;
   }
   .list-card-single {
     margin: 1.5em 1.5em 1.5em 1.5em ;
-    max-width: 300px;
-    min-width: 300px;
-  }
+    width: 350px;
+  } 
+  /* .mat-tab-body-content {
+    height: 90vh !important;
+    overflow: unset !important;
+    background-color: green !important;
+} */
+
+  /* max-width: 300px;
+  min-width: 300px; */

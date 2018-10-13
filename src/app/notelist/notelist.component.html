@@ -8,7 +8,15 @@
                     <div>
                         <a routerLink="/note/{{n.ID}}/{{n.Desc}}">View</a>
                         <a routerLink="/notemembers/{{n.ID}}">Share</a>
-                        <button (click)="deleteNoteList(n.ID)">Delete</button>
+                        <button mat-icon-button title="See List">
+                            <mat-icon>list</mat-icon>
+                        </button>
+                        <button mat-icon-button title="Share" >
+                            <mat-icon>group_add</mat-icon>
+                        </button>
+                        <button mat-icon-button (click)="deleteNoteList(n.ID)" title="Delete">
+                            <mat-icon>delete</mat-icon>
+                        </button>
                     </div>
                     <!-- {{n.Creator}} -->
                 </li>

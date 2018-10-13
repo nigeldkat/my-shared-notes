@@ -10,3 +10,9 @@ body{
     margin: 0;
     height: 100%;
 }
+
+.mat-tab-body-content {
+    /* height: 90vh !important; */
+    overflow: unset !important;
+    /* background-color: green !important; */
+} 
