@@ -6,7 +6,7 @@ import { AuthService } from './auth.service';
 export class AuthGuard implements CanActivate, CanLoad{
     constructor(private authService: AuthService, private router: Router){}
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot){  
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot){ 
         if( this.authService.isAuth()){
             return true;
         } else {
@@ -16,10 +16,8 @@ export class AuthGuard implements CanActivate, CanLoad{
 
     canLoad(route: Route){
         if( this.authService.isAuth()){
-            //console.log('in auth guard auth service true')
             return true;
         } else {
-            //console.log('in auth guard auth service false')
             this.router.navigate(['/login']);
         }
     }

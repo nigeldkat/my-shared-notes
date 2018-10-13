@@ -11,6 +11,7 @@ import {
 import { UIService } from '../shared/ui.service';
 import { User } from './user.model';
 import { NoteService } from '../note/note.service';
+import { promise } from "protractor";
 
 @Injectable()
 export class AuthService {
@@ -28,6 +29,7 @@ export class AuthService {
 
     initAuthListener() {
         this.afAuth.authState.subscribe(user => {
+            console.log('in subscribe code return for authstate')
             if (user) {
                 //console.log('in auth callback true');
                 this.isAuthenticated = true;
@@ -55,7 +57,7 @@ export class AuthService {
             .then(result => {
                 //console.log('successful login')
                 this.uiService.loadingStateChanged.next(false);
-                this.router.navigate(['/note']);
+                this.router.navigate(['/notelist']);
             })
             .catch(error => {
                 //console.log('failed login')
@@ -87,7 +89,6 @@ export class AuthService {
     isAuth() {
         return this.isAuthenticated;
     }
-
 
     get currentUserId(): string {
         return this.isAuthenticated ? this.user.uid : null

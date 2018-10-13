@@ -10,8 +10,6 @@ import { ListWithMembers } from './list-with-members.model';
 @Injectable()
 export class NoteMembersService {
 
-    //usersChanged = new Subject<User[]>();
-    //listDataChanged = new Subject<NoteList>();
     ListWithMembersChanged = new Subject<ListWithMembers>();
     AddMemberStatusChanged = new Subject<string>();
 
@@ -29,11 +27,11 @@ export class NoteMembersService {
 
 
     getListData(id: string) {
-        this.noteListId = id;//: string = '0QeHI30TMXqPANjOY6ZL';///Lists/0QeHI30TMXqPANjOY6ZL
-
+        this.noteListId = id;
+        
         this.db.collection(`Lists`, ref => ref.where('ID', "==", this.noteListId)).valueChanges().subscribe(            
             (notes: NoteList[]) => {
-                console.log('in subscribe ');
+                //console.log('in subscribe ');
                 this.listData = notes[0];
                 this.listWithMembers = {
                     Creator: this.listData.Creator,
@@ -93,20 +91,20 @@ export class NoteMembersService {
         //find the user
         this.db.collection(`users`, ref => ref.where(`email`, '==', email)).valueChanges().subscribe(
             (users: User[]) => {
-                console.log('in subscribe');
+                //console.log('in subscribe');
 
 
 
                 userList = users;
                 //this.notesChanged.next(notes);
-                console.log('users ', users);
+                //console.log('users ', users);
 
                 if (userList.length == 1) {
                     const id: string = userList[0].uid;
                     // console.log('id - ', id);
                     //const noteListId: string = '0QeHI30TMXqPANjOY6ZL';
                     const list: AngularFirestoreDocument<NoteList> = this.db.doc(`Lists/${this.noteListId}`);
-                    console.log('list - ', list);
+                    //console.log('list - ', list);
                     this.listData.Members[id] = true;
                     // const newUID: string = 'zGrpwEsF0xc25bR6O6KuTHFkZxM3';
                     // this.listData.Members[newUID] = true;
@@ -120,10 +118,6 @@ export class NoteMembersService {
             }
         );
 
-        //return 'nothing';
-        //const list : AngularFirestoreDocument<User> = this.db.doc(`users`)
-        //console.log('vaule - ', u);
-        // );
     }
 
     cancelSubscriptions() {
