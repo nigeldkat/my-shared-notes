@@ -1,26 +1,25 @@
+
 <section fxLayout="column" fxLayoutAlign="center center ">
     <mat-card class="list-card">
         <mat-card-title>Your Lists</mat-card-title>
         <mat-card-content>
-            <ul>
-                <li *ngFor="let n of noteList">
-                    <div>{{n.Desc}}</div>
-                    <div>
-                        <a routerLink="/note/{{n.ID}}/{{n.Desc}}">View</a>
-                        <a routerLink="/notemembers/{{n.ID}}">Share</a>
-                        <button mat-icon-button title="See List">
+            <div class="container" *ngFor="let n of noteList">
+                <div class="row">
+                    <div class='col-xs-5' style="padding-top: 10px; padding-left: 0px;">{{n.Desc}}</div>
+                    <div class='col-xs-7 ' style=" padding-right: 0">
+                        <button style="float:right; " mat-icon-button title="See List" (click)='goToViewList(n.ID,n.Desc)'>
                             <mat-icon>list</mat-icon>
                         </button>
-                        <button mat-icon-button title="Share" >
+                        <button style="float:right; " mat-icon-button title="Share" (click)="goToAddMember(n.ID)">
                             <mat-icon>group_add</mat-icon>
                         </button>
-                        <button mat-icon-button (click)="deleteNoteList(n.ID)" title="Delete">
+                        <button style="float:right;" mat-icon-button (click)="deleteNoteList(n.ID)" title="Delete">
                             <mat-icon>delete</mat-icon>
                         </button>
                     </div>
-                    <!-- {{n.Creator}} -->
-                </li>
-            </ul>
+                </div>
+                <mat-divider></mat-divider>
+            </div>
         </mat-card-content>
     </mat-card>
     <form (ngSubmit)="addNewList(f)" #f="ngForm">

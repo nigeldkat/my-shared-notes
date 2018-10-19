@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { Subscription } from 'rxjs';
 
+import { Router } from '@angular/router';
 import { NoteListService } from './notelist.service';
 import { NoteList } from './notelist.model';
 
@@ -16,7 +17,7 @@ export class NoteListComponent implements OnInit, OnDestroy {
   public noteList: NoteList[] = [];
   @ViewChild('f') templateForm : NgForm;
 
-  constructor(private nService: NoteListService) { }
+  constructor(private nService: NoteListService, private router: Router) { }
 
   ngOnInit() {
     this.noteSubscription = this.nService.notesChanged.subscribe(
@@ -36,6 +37,14 @@ export class NoteListComponent implements OnInit, OnDestroy {
     this.nService.addNoteToNoteList(form.value.noteDesc);
     //this.nService.addDataToDatabase({text: form.value.listItem});
     this.templateForm.resetForm();
+  }
+
+  goToAddMember(id: string){
+    this.router.navigate([`/notemembers/${id}`]);
+  }
+
+  goToViewList(id: string, desc: string){
+    this.router.navigate([`/note/${id}/${desc}`]);
   }
 
   deleteNoteList(ID: string){
