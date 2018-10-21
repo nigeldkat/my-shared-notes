@@ -4,17 +4,17 @@
         <mat-card-title>Your Lists</mat-card-title>
         <mat-card-content>
             <div class="container" *ngFor="let n of noteList">
-                <div class="row">
-                    <div class='col-xs-5' style="padding-top: 10px; padding-left: 0px;">{{n.Desc}}</div>
-                    <div class='col-xs-7 ' style=" padding-right: 0">
-                        <button style="float:right; " mat-icon-button title="See List" (click)='goToViewList(n.ID,n.Desc)'>
-                            <mat-icon>list</mat-icon>
+                <div  style="width:250px;"> 
+                    <div style="padding-top: 10px; padding-left: 0px; width:150px; float:left">{{n.Desc}}</div>
+                    <div  style=" padding-right: 0; width:90px; float:right;">
+                        <button style="float:right; width:28px; height: 28px;" mat-icon-button (click)="deleteNoteList(n.ID)" title="Delete">
+                            <mat-icon>delete</mat-icon>
                         </button>
-                        <button style="float:right; " mat-icon-button title="Share" (click)="goToAddMember(n.ID)">
+                        <button style="float:right; width:28px; height: 28px; " mat-icon-button title="Share" (click)="goToAddMember(n.ID)">
                             <mat-icon>group_add</mat-icon>
                         </button>
-                        <button style="float:right;" mat-icon-button (click)="deleteNoteList(n.ID)" title="Delete">
-                            <mat-icon>delete</mat-icon>
+                        <button style="float:right; width:28px; height: 28px;" mat-icon-button title="See List" (click)='goToViewList(n.ID,n.Desc)'>
+                            <mat-icon>list</mat-icon>
                         </button>
                     </div>
                 </div>

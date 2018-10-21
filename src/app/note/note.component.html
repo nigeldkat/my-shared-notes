@@ -1,6 +1,4 @@
 <section fxLayout="column" fxLayoutAlign="center center ">
-    <!--fxLayoutAlign="center center "-->
-
     <mat-tab-group>
         <mat-tab label='List Items'>
             <mat-card class="list-card">
@@ -10,18 +8,17 @@
 
                     <mat-list>
                         <mat-list-item *ngFor="let note of noteList">
-                            <button mat-icon-button title="Got It" (click)="selectedItem(note.ID, true)">
-                                <mat-icon>checked_circle_outline</mat-icon>
-                            </button>
-                            <!-- <input type="checkbox" [ngModel]="note.Selected" (click)="selectedItem(note.ID, true)"> -->
-                            {{note.Desc}}
-                            <!-- <button (click)="deleteNote(note.ID)">Delete</button> -->
-                            <button mat-icon-button title="Delete" (click)="deleteNote(note.ID)">
-                                <mat-icon>delete</mat-icon>
-                            </button>
-
-                            <br>
-
+                            <div style="width:250px;">
+                                <div style="padding-top: 10px; padding-left: 0px; width:150px; float:left">{{note.Desc}}</div>
+                                <div style=" padding-right: 0; width:90px; float:right;">                                   
+                                    <button style="float:right; width:28px; height: 28px;" mat-icon-button title="Delete" (click)='deleteNote(note.ID)'>
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                    <button style="float:right; width:28px; height: 28px;" mat-icon-button (click)="selectedItem(note.ID, true)" title="Got It">
+                                        <mat-icon>done</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
                             <mat-divider></mat-divider>
                         </mat-list-item>
                     </mat-list>
@@ -32,7 +29,6 @@
 
             <form (ngSubmit)="addNewNote(f)" #f="ngForm">
                 <mat-card class="list-card-single">
-                    <!--fxFlex.xs="100%" fxFlex="400px"-->
                     <mat-card-title fxLayoutAlign="center ">Add Items</mat-card-title>
                     <mat-card-content fxLayoutAlign="center ">
                         <mat-form-field>
@@ -48,31 +44,27 @@
         </mat-tab>
         <mat-tab label='Completed Items'>
             <mat-card class="list-card-single">
-                <!--fxFlex.xs="100%" fxFlex="400px"-->
-                <!-- <mat-card-title fxLayoutAlign="center ">Saved Items</mat-card-title> -->
                 <mat-card-content>
-                    <!--fxLayoutAlign="center center"-->
                     <div>
                         <p>Items you'll add to the list again</p>
                     </div>
-
                     <mat-list>
                         <mat-list-item *ngFor="let note of oldNoteList">
-
-                            <button mat-icon-button title="Add To List" (click)="selectedItem(note.ID, false)">
-                                <mat-icon>add_box</mat-icon>
-                            </button>
-                            {{note.Desc}}
-                            <button mat-icon-button title="Delete" (click)="deleteNote(note.ID)">
-                                <mat-icon>delete</mat-icon>
-                            </button>
+                            <div style="width:250px;">
+                                <div style="padding-top: 10px; padding-left: 0px; width:150px; float:left">{{note.Desc}}</div>
+                                <div style=" padding-right: 0; width:90px; float:right;">
+                                    <button style="float:right; width:28px; height: 28px;" mat-icon-button title="Delete" (click)='deleteNote(note.ID)'>
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                    <button style="float:right; width:28px; height: 28px;" mat-icon-button (click)="selectedItem(note.ID, false)" title="Add To List">
+                                        <mat-icon>add_box</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
                             <mat-divider></mat-divider>
                         </mat-list-item>
                     </mat-list>
-
                 </mat-card-content>
-
-
             </mat-card>
         </mat-tab>
     </mat-tab-group>

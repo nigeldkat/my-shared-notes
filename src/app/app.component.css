@@ -8,11 +8,11 @@ mat-sidenav{
 
 .list-card {
     margin: 1.5em 1.5em 0em 1.5em ;
-    max-width: 400px;
+    max-width: 300px;
     min-width: 300px;
   }
   .list-card-single {
     margin: 1.5em 1.5em 1.5em 1.5em ;
-    max-width: 400px;
+    max-width: 300px;
     min-width: 300px;
   }
