@@ -8,6 +8,8 @@ import {
     AngularFirestoreDocument
 } from "angularfire2/firestore";
 
+import * as firebase from "firebase/app";
+
 import { UIService } from '../shared/ui.service';
 import { User } from './user.model';
 import { NoteService } from '../note/note.service';
@@ -70,7 +72,7 @@ export class AuthService {
 
     regusterUser(email: string, password: string, displayName: string) {
         this.uiService.loadingStateChanged.next(true);
-        this.afAuth.auth
+        return this.afAuth.auth
             .createUserWithEmailAndPassword(email, password)
             .then(user => this.updateUserData(user, displayName))
             .then(result => {
@@ -89,6 +91,15 @@ export class AuthService {
     isAuth() {
         return this.isAuthenticated;
     }
+
+    
+  resetPassword(email: string) {
+    return firebase
+      .auth()
+      .sendPasswordResetEmail(email)
+      .then(() => console.log("We've sent you a password reset link"))
+      .catch(error => console.log(error.message));
+  }
 
     get currentUserId(): string {
         return this.isAuthenticated ? this.user.uid : null

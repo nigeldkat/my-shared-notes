@@ -23,6 +23,9 @@
         formControlName="password">
       <mat-hint>Please enter your password.</mat-hint>
       <mat-error>Missing password.</mat-error>
+      <mat-hint align="end">
+        <a routerLink="/reset-password">Forgot password?</a>
+      </mat-hint>
     </mat-form-field>
     <button *ngIf="!isLoading" type="submit" mat-raised-button color="primary" [disabled]="loginForm.invalid">Submit</button>
     <mat-spinner *ngIf="isLoading"></mat-spinner>

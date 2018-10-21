@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';  //for two way binding or template form
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 import { AuthService } from '../auth.service';
 import { UIService } from '../../shared/ui.service';
@@ -14,7 +15,7 @@ export class SignupComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
   private loadingSubs: Subscription;
 
-  constructor(private authService: AuthService, private uiService: UIService) { }
+  constructor(private authService: AuthService, private uiService: UIService, private router: Router) { }
 
   ngOnInit() {
     this.loadingSubs = this.uiService.loadingStateChanged.subscribe(
@@ -34,7 +35,8 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(form: NgForm) {
-    this.authService.regusterUser( form.value.email, form.value.password, form.value.displayname );
+    return this.authService.regusterUser( form.value.email, form.value.password, form.value.displayname )
+    .then(() => this.router.navigate(['/notelist']));
   }
 
 }
