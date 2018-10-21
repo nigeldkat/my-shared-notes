@@ -3,23 +3,25 @@
     <mat-card class="list-card">
         <mat-card-title>Your Lists</mat-card-title>
         <mat-card-content>
-            <div class="container" *ngFor="let n of noteList">
-                <div  style="width:250px;"> 
-                    <div style="padding-top: 10px; padding-left: 0px; width:150px; float:left">{{n.Desc}}</div>
-                    <div  style=" padding-right: 0; width:90px; float:right;">
-                        <button style="float:right; width:28px; height: 28px;" mat-icon-button (click)="deleteNoteList(n.ID)" title="Delete">
-                            <mat-icon>delete</mat-icon>
-                        </button>
-                        <button style="float:right; width:28px; height: 28px; " mat-icon-button title="Share" (click)="goToAddMember(n.ID)">
-                            <mat-icon>group_add</mat-icon>
-                        </button>
-                        <button style="float:right; width:28px; height: 28px;" mat-icon-button title="See List" (click)='goToViewList(n.ID,n.Desc)'>
-                            <mat-icon>list</mat-icon>
-                        </button>
+            <mat-list>
+                <mat-list-item *ngFor="let n of noteList" style="width:250px;">
+                    <div style="width:250px;">
+                        <div style="padding-top: 10px; padding-left: 0px; width:120px; float:left">{{n.Desc}}</div>
+                        <div  style=" padding-right: 0; width:90px; float:right;">
+                            <button style="float:right; width:28px; height: 28px;" mat-icon-button (click)="deleteNoteList(n.ID)" title="Delete">
+                                <mat-icon>delete</mat-icon>
+                            </button>
+                            <button style="float:right; width:28px; height: 28px; " mat-icon-button title="Share" (click)="goToAddMember(n.ID)">
+                                <mat-icon>group_add</mat-icon>
+                            </button>
+                            <button style="float:right; width:28px; height: 28px;" mat-icon-button title="See List" (click)='goToViewList(n.ID,n.Desc)'>
+                                <mat-icon>list</mat-icon>
+                            </button>
+                        </div>
                     </div>
-                </div>
-                <mat-divider></mat-divider>
-            </div>
+                    <mat-divider></mat-divider>
+                </mat-list-item>
+            </mat-list>
         </mat-card-content>
     </mat-card>
     <form (ngSubmit)="addNewList(f)" #f="ngForm">
