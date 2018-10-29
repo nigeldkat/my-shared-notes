@@ -6,7 +6,7 @@
             <mat-list>
                 <mat-list-item *ngFor="let n of noteList" style="width:250px;">
                     <div style="width:250px;">
-                        <div style="padding-top: 10px; padding-left: 0px; width:120px; float:left">{{n.Desc}}</div>
+                        <div (click)='goToViewList(n.ID,n.Desc)' style="padding-top: 10px; padding-left: 0px; width:120px; float:left">{{n.Desc}}</div>
                         <div  style=" padding-right: 0; width:90px; float:right;">
                             <button style="float:right; width:28px; height: 28px;" mat-icon-button (click)="deleteNoteList(n.ID)" title="Delete">
                                 <mat-icon>delete</mat-icon>

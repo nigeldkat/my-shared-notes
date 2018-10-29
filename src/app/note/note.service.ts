@@ -17,7 +17,8 @@ export class NoteService {
     constructor(private db: AngularFirestore) { }
 
     addNoteToList(item: Note) {
-        this.db.collection(`notes`).add(item).then(
+       
+        this.db.collection(`Lists/${this.listID}/Items`).add(item).then(
             note => {
                 const listItem: AngularFirestoreDocument<Note> =
                     this.db.doc(`Lists/${this.listID}/Items/${note.id}`)
