@@ -49,7 +49,7 @@ export class NoteService {
     fetchNotes(listID: string) {
         this.listID = listID;
         this.fbSubs.push(
-            this.db.collection(`Lists/${listID}/Items`, ref => ref.where(`Selected`, '==', false)).valueChanges().subscribe(
+            this.db.collection(`Lists/${listID}/Items`, ref => ref.where(`Selected`, '==', false).orderBy('Desc')).valueChanges().subscribe(
                 (notes: Note[]) => {
                     this.notesChanged.next(notes);
                 }
@@ -61,7 +61,7 @@ export class NoteService {
     fetchOldNotes(listID: string) {
         this.listID = listID;
         this.fbSubs.push(
-            this.db.collection(`Lists/${listID}/Items`, ref => ref.where(`Selected`, '==', true)).valueChanges().subscribe(
+            this.db.collection(`Lists/${listID}/Items`, ref => ref.where(`Selected`, '==', true).orderBy('Desc')).valueChanges().subscribe(
                 (notes: Note[]) => {
                     this.oldNotesChanged.next(notes);
                 }

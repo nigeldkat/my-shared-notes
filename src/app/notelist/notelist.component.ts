@@ -48,9 +48,10 @@ export class NoteListComponent implements OnInit, OnDestroy {
   }
 
   deleteNoteList(ID: string){
-    //add are you sure maybe?
-    //alert('in delete - ' + ID);
-    this.nService.deleteNoteList(ID);
+    if (confirm('Are you sure you want delete this list?')) {
+      this.nService.deleteNoteList(ID);
+    } 
+    
   }
 
 
